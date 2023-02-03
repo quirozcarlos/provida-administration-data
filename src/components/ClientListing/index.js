@@ -19,7 +19,7 @@ const ClientListingUI = (props) => {
       <ClientList>
         <div style={{ }}>
           <div>
-            <h1 id='title'>List of Clients</h1>
+            <h1 id='title'>Listado de clientes</h1>
           </div>
           {/* <SearchBar
             lazyLoad

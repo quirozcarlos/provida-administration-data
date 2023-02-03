@@ -11,6 +11,10 @@ import theme from './theme.json'
 import home from './assets/home.jpg'
 import { EventProvider } from './contexts/EventContext';
 
+import "primereact/resources/themes/lara-light-indigo/theme.css";  //theme
+import "primereact/resources/primereact.min.css";                  //core css
+import "primeicons/primeicons.css";                                //icons
+
 theme.images = {
   home
 }

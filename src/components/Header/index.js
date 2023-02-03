@@ -4,13 +4,17 @@ import {
   InnerHeader,
   LogoHeader,
   LeftHeader,
-  LeftSide
+  LeftSide,
+  Title
 } from './styles'
 
 import logo from '../../logo.svg';
 
 export const Header = (props) => {
   const { goToPage } = props
+  const style = {
+    marginLeft: "100px"
+  }
 
   return (
     <HeaderContainer>
@@ -20,7 +24,7 @@ export const Header = (props) => {
             <LogoHeader
               onClick={() => goToPage('home')}
             >
-              <img src={logo} className="App-logo" alt="logo" />
+              <Title style={style}>ADMINISTRACIÓN PROVIDA</Title>
             </LogoHeader>
           </LeftHeader>
         </LeftSide>

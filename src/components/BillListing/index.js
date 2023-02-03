@@ -48,21 +48,25 @@ const BillListingUI = (props) => {
       <BillList>
         <div style={{ }}>
           <div>
-            <h1 id='title'>Search Bills</h1>
+            <h1 id='title'>Buscar facturas</h1>
           </div>
           <div style={{ marginTop: 30, display: 'flex', alignItems: 'center' }}>
             <div>
-              <span>Start date</span>
+              <span>Desde</span>
               <ReactDatePicker
                 selected={startDate}
+                format="dd-mm-yyyy"
                 onChange={(date) => setStartDate(date)}
               />
             </div>
             <div>
-              <span>End date</span>
+              <span>Hasta</span>
               <ReactDatePicker
                 selected={endDate}
                 minDate={startDate}
+                format="dd-mm-yyyy"
+                value={new Date()}
+                maxDate={new Date()}
                 onChange={(date) => setEndDate(date)}
               />
             </div>
@@ -71,7 +75,7 @@ const BillListingUI = (props) => {
                 color='primary'
                 onClick={() => onClickSearch()}
               >
-                Search
+                Buscar
               </Button>
             </div>
           </div>

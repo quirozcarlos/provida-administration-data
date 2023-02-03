@@ -17,19 +17,19 @@ export const HomeHero = (props) => {
     <HeroContainer bgimage={theme.images.home}>
       <ContentWrapper>
         <HeroContent>
-          <Title>PROVIDA ADMINISTRATION DATA</Title>
+          <Title>PROVIDA - ADMINISTRACIÓN DE DATOS</Title>
           <WrapButtons>
             <Button
               color='primary'
               onClick={() => goToPage('clients')}
             >
-              Client List
+              Lista de clientes
             </Button>
             <Button
               color='primary'
               onClick={() => goToPage('bills')}
             >
-              Search Bills
+              Buscar facturas
             </Button>
           </WrapButtons>
         </HeroContent>

@@ -458,3 +458,29 @@ export const LeftSide = styled.div`
     width: 60%;
   }
 `
+
+export const Title = styled.h1`
+  margin: 0px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 30px;
+  line-height: 36px;
+  letter-spacing: 0px;
+  color: #FFFFFF;
+  text-shadow: 0px 3px 6px #2c2e33;
+  opacity: 1;
+
+  @media (min-width: 381px) {
+    font-size: 35px;
+  }
+
+
+  @media (min-width: 576px) {
+    font-size: 40px;
+    line-height: initial;
+  }
+
+  @media (min-width: 850px) {
+    font-size: 45px;
+  }
+`
