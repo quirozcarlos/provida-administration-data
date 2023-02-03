@@ -24,7 +24,7 @@ export const BackController = (props) => {
         ? 'buscarFacturaPorFecha'
         : searchValue.type === 'billid'
           ? 'buscarFacturaPorId '
-          : 'buscarFacturaPorIdClient'
+          : 'buscarFacturaPorIdCliente'
 
       const req = await fetch(`${apiUrl}/${urlType}`, {
         method: 'POST',
@@ -82,7 +82,6 @@ export const BackController = (props) => {
 
   useEffect(() => {
     getClients()
-    console.log('inside');
   }, [])
 
   return (

@@ -10,7 +10,8 @@ export const SearchBar = (props) => {
     placeholder,
     lazyLoad,
     handleCustomEnter,
-    forwardRef
+    forwardRef,
+    containerStyle
   } = props
 
   let timeout = null
@@ -66,6 +67,7 @@ export const SearchBar = (props) => {
     <ContainerSearch
       className={'search-bar'}
       hasValue={el.current?.value}
+      style={containerStyle}
     >
       <Input
         ref={(ref) => {

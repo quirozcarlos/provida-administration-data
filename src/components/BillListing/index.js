@@ -90,6 +90,17 @@ const BillListingUI = (props) => {
               value
             })}
           />
+          <SearchBar
+            lazyLoad
+            containerStyle={{ marginTop: 20 }}
+            search={searchValue?.type === 'billclient' && searchValue?.value}
+            placeholder={'Search by client id'}
+            onSearch={(value) => setSearchValue({
+              ...searchValue,
+              type: 'billclient',
+              value
+            })}
+          />
         </div>
         {billState.loading && (
           <NotFoundSource content={'Loading Bills'} />
