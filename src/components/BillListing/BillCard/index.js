@@ -19,7 +19,7 @@ export const BillCard = (props) => {
     marginTop: "20px"
   }
   return (
-    <CardContainer className="bill-card">
+    <CardContainer className="bill-card shadow-sm p-3 mb-5 bg-body rounded">
       <div onClick={() => setVisible(true)}>
         <CardInfo>
           <TitleWrapper>{item?.tipo_factura_nombre}</TitleWrapper>

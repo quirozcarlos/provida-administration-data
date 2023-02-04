@@ -49,7 +49,7 @@ const BillListingUI = (props) => {
       <BillList>
         <div style={{ marginBottom: 40 }}>
           <div>
-            <h1 id='title'>Buscar facturas</h1>
+            <h1 id='title'>Buscar Facturas</h1>
           </div>
           <div style={{ marginTop: 30, display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
             <SearchWith>
@@ -80,17 +80,19 @@ const BillListingUI = (props) => {
             {currentTab === 'date' && (
               <div style={{ width: '100%' }}>
                 <div style={{ display: 'flex', marginTop: 20, alignItems: 'flex-end' }}>
-                  <div>
-                    <span>Desde</span>
+                  <div className='me-4'>
+                    <span>Fecha Inicio</span>
                     <ReactDatePicker
+                      className='form-control datepicker'
                       selected={startDate}
                       format="dd-mm-yyyy"
                       onChange={(date) => setStartDate(date)}
                     />
                   </div>
-                  <div>
-                    <span>Hasta</span>
+                  <div className='me-4'>
+                    <span>Fecha Fin</span>
                     <ReactDatePicker
+                      className='form-control datepicker'
                       selected={endDate}
                       minDate={startDate}
                       format="dd-mm-yyyy"
@@ -101,6 +103,7 @@ const BillListingUI = (props) => {
                   </div>
                   <div>
                     <Button
+                      className='mt-4 btn btn-primary btn-sm'
                       color='primary'
                       onClick={() => onClickSearch()}
                     >
@@ -121,7 +124,7 @@ const BillListingUI = (props) => {
                   lazyLoad
                   containerStyle={{ marginTop: 20, width: '40%' }}
                   search={searchValue?.type === 'billid' && searchValue?.value}
-                  placeholder={'Buscar por id'}
+                  placeholder={'Buscar por Id Factura'}
                   onSearch={(value) => setSearchValue({
                     ...searchValue,
                     type: 'billid',
@@ -136,7 +139,7 @@ const BillListingUI = (props) => {
                   lazyLoad
                   containerStyle={{ marginTop: 20, width: '40%' }}
                   search={searchValue?.type === 'billclient' && searchValue?.value}
-                  placeholder={'Buscar por id de cliente'}
+                  placeholder={'Buscar por id Cliente'}
                   onSearch={(value) => setSearchValue({
                     ...searchValue,
                     type: 'billclient',
