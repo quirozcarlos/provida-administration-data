@@ -69,7 +69,7 @@ export const SearchBar = (props) => {
       hasValue={el.current?.value}
       style={containerStyle}
     >
-      <Input
+      <Input className='form-control p-2'
         ref={(ref) => {
           el.current = ref
           forwardRef && (forwardRef.current = ref)
@@ -83,7 +83,7 @@ export const SearchBar = (props) => {
         onClick={() => handleCustomEnter && handleCustomEnter()}
       />
       <DeleteContent className='clear'>
-        {el.current?.value && <span onClick={handleClear}>Clear</span>}
+        {el.current?.value && <span onClick={handleClear} className='text-danger fs-6 me-2'>X</span>}
       </DeleteContent>
     </ContainerSearch>
   )

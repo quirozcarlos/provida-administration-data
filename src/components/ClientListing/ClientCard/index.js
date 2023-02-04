@@ -15,7 +15,7 @@ export const ClientCard = (props) => {
     fontWeight: "700",
   };
   return (
-    <CardContainer className="bill-card">
+    <CardContainer className="bill-card shadow-sm p-3 mb-5 bg-body rounded">
       <div onClick={() => setVisible(true)}>
         <CardInfo>
           <TitleWrapper>
