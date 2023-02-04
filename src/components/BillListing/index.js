@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import ReactDatePicker from 'react-datepicker'
 
-import { BillContainer, BillList, BillListContainer, BillListWrapper, WrapperSearch } from './styles'
+import { BillContainer, BillList, BillListContainer, BillListWrapper, SearchWith, WrapperSearch } from './styles'
 import { BackController } from '../BackController'
 import { NotFoundSource } from '../NotFoundSource'
 import { SearchBar } from '../SearchBar'
@@ -9,6 +9,7 @@ import { BillCard } from './BillCard'
 import { Button } from '../Shared/Buttons'
 
 import 'react-datepicker/dist/react-datepicker.css';
+import { Tab, Tabs } from '../Shared/Tabs'
 
 const BillListingUI = (props) => {
   const {
@@ -21,8 +22,8 @@ const BillListingUI = (props) => {
 
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
-
   const [errorDates, setErrorDates] = useState(null)
+  const [currentTab, setCurrentTab] = useState('date')
 
   const onClickSearch = () => {
     if (endDate < startDate) {
@@ -46,71 +47,111 @@ const BillListingUI = (props) => {
   return (
     <BillContainer>
       <BillList>
-        <div style={{ }}>
+        <div style={{ marginBottom: 40 }}>
           <div>
             <h1 id='title'>Buscar facturas</h1>
           </div>
-          <div style={{ marginTop: 30, display: 'flex', alignItems: 'center' }}>
-            <div>
-              <span>Desde</span>
-              <ReactDatePicker
-                selected={startDate}
-                format="dd-mm-yyyy"
-                onChange={(date) => setStartDate(date)}
-              />
-            </div>
-            <div>
-              <span>Hasta</span>
-              <ReactDatePicker
-                selected={endDate}
-                minDate={startDate}
-                format="dd-mm-yyyy"
-                value={new Date()}
-                maxDate={new Date()}
-                onChange={(date) => setEndDate(date)}
-              />
-            </div>
-            <div>
-              <Button
-                color='primary'
-                onClick={() => onClickSearch()}
-              >
-                Buscar
-              </Button>
-            </div>
+          <div style={{ marginTop: 30, display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
+            <SearchWith>
+              <Tabs variant='primary'>
+                <Tab
+                  onClick={() => setCurrentTab('date')}
+                  active={currentTab === 'date'}
+                  borderBottom={currentTab === 'date'}
+                >
+                  Buscar por fecha
+                </Tab>
+                <Tab
+                  onClick={() => setCurrentTab('id')}
+                  active={currentTab === 'id'}
+                  borderBottom={currentTab === 'id'}
+                >
+                  Buscar por id
+                </Tab>
+                <Tab
+                  onClick={() => setCurrentTab('client')}
+                  active={currentTab === 'client'}
+                  borderBottom={currentTab === 'client'}
+                >
+                  Buscar por cliente
+                </Tab>
+              </Tabs>
+            </SearchWith>
+            {currentTab === 'date' && (
+              <div style={{ width: '100%' }}>
+                <div style={{ display: 'flex', marginTop: 20, alignItems: 'flex-end' }}>
+                  <div>
+                    <span>Desde</span>
+                    <ReactDatePicker
+                      selected={startDate}
+                      format="dd-mm-yyyy"
+                      onChange={(date) => setStartDate(date)}
+                    />
+                  </div>
+                  <div>
+                    <span>Hasta</span>
+                    <ReactDatePicker
+                      selected={endDate}
+                      minDate={startDate}
+                      format="dd-mm-yyyy"
+                      value={new Date()}
+                      maxDate={new Date()}
+                      onChange={(date) => setEndDate(date)}
+                    />
+                  </div>
+                  <div>
+                    <Button
+                      color='primary'
+                      onClick={() => onClickSearch()}
+                    >
+                      Buscar
+                    </Button>
+                  </div>
+                </div>
+                <div>
+                  <p style={{ color: 'red' }}>
+                    {errorDates}
+                  </p>
+                </div>
+              </div>
+            )}
+            {currentTab === 'id' && (
+              <div style={{ width: '100%' }}>
+                <SearchBar
+                  lazyLoad
+                  containerStyle={{ marginTop: 20, width: '40%' }}
+                  search={searchValue?.type === 'billid' && searchValue?.value}
+                  placeholder={'Buscar por id'}
+                  onSearch={(value) => setSearchValue({
+                    ...searchValue,
+                    type: 'billid',
+                    value
+                  })}
+                />
+              </div>
+            )}
+            {currentTab === 'client' && (
+              <div style={{ width: '100%' }}>
+                <SearchBar
+                  lazyLoad
+                  containerStyle={{ marginTop: 20, width: '40%' }}
+                  search={searchValue?.type === 'billclient' && searchValue?.value}
+                  placeholder={'Buscar por id de cliente'}
+                  onSearch={(value) => setSearchValue({
+                    ...searchValue,
+                    type: 'billclient',
+                    value
+                  })}
+                />
+              </div>
+            )}
           </div>
-          <div>
-            <p style={{ color: 'red' }}>
-              {errorDates}
-            </p>
-          </div>
-          <SearchBar
-            lazyLoad
-            search={searchValue?.type === 'billid' && searchValue?.value}
-            placeholder={'Search by id'}
-            onSearch={(value) => setSearchValue({
-              ...searchValue,
-              type: 'billid',
-              value
-            })}
-          />
-          <SearchBar
-            lazyLoad
-            containerStyle={{ marginTop: 20 }}
-            search={searchValue?.type === 'billclient' && searchValue?.value}
-            placeholder={'Search by client id'}
-            onSearch={(value) => setSearchValue({
-              ...searchValue,
-              type: 'billclient',
-              value
-            })}
-          />
         </div>
         {billState.loading && (
-          <NotFoundSource content={'Loading Bills'} />
+          <NotFoundSource content={'Cargando facturas'} />
         )}
         {!errorDates && !billState.loading && !billState.result?.length && (
-          <NotFoundSource content={'No results'} />
+          <NotFoundSource content={'No hay resultados para mostrar'} />
         )}
         {!billState.loading && !!billState.result?.length && (
           <BillListWrapper>

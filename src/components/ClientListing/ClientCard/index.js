@@ -25,7 +25,7 @@ export const ClientCard = (props) => {
           {item?.correo?.toLowerCase() !== "no" && (
             <ContentWrapper>{item?.correo}</ContentWrapper>
           )}
-          <ContentWrapper>Phone number: {item?.telefono}</ContentWrapper>
+          <ContentWrapper>Teléfono: {item?.telefono}</ContentWrapper>
         </CardInfo>
       </div>
       <Dialog

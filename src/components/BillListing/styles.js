@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const BillContainer = styled.div`
   display: flex;
@@ -55,5 +55,29 @@ export const BillListWrapper = styled.div`
 export const BillListContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
+`
+
+export const SearchWith = styled.div`
+  width: 100%;
+  border-bottom: 1px solid #E9ECEF;
+  font-size: 14px;
+  margin-bottom: 10px;
+  overflow-x: auto;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media (min-width: 425px) {
+    font-size: 18px;
+  }
+
+  @media (min-width: 768px) {
+    font-size: 14px;
+  }
+
+  @media (min-width: 992px) {
+    font-size: 18px;
+  }
 `
 

@@ -13,7 +13,7 @@ import logo from '../../logo.svg';
 export const Header = (props) => {
   const { goToPage } = props
   const style = {
-    marginLeft: "100px"
+    marginLeft: "40px"
   }
 
   return (

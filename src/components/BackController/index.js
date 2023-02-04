@@ -7,8 +7,16 @@ export const BackController = (props) => {
 
   const apiUrl = settings.api.url
   const [billState, setbillState] = useState({ loading: false, error: null, result: null })
-  const [clientState, setClientState] = useState({ loading: false, error: null, result: null })
+  const [clientState, setClientState] = useState({ loading: true, error: null, result: null, clients: null })
   const [searchValue, setSearchValue] = useState({ type: null, value: null })
+  const [currentTabClients, setCurrentTabClients] = useState(null)
+
+  const clientFiltersDictionary = {
+    id: 'cedula_RIF',
+    name: 'clienteNombre',
+    mail: 'correo',
+    phone: 'telefono'
+  }
 
   const getBill = async () => {
     if (searchValue.type === null) return
@@ -64,16 +72,26 @@ export const BackController = (props) => {
       setClientState({
         ...clientState,
         loading: false,
-        result: Array.isArray(res) ? res : [res]
+        result: Array.isArray(res) ? res : [res],
+        clients: Array.isArray(res) ? res : [res]
       })
     } catch (error) {
       setClientState({
         ...clientState,
         loading: false,
         result: null,
+        clients: null,
         error: error?.message ?? error
       })
     }
+  }
+
+  const filterClients = () => {
+    const param = clientFiltersDictionary?.[currentTabClients] ?? null
+    setClientState({
+      ...clientState,
+      clients: clientState.result?.filter(client => param && searchValue.value ? client[param]?.toLowerCase()?.includes(searchValue.value.toLowerCase()) : client)
+    })
   }
 
   useEffect(() => {
@@ -84,14 +102,21 @@ export const BackController = (props) => {
     getClients()
   }, [])
 
+  useEffect(() => {
+    if (clientState.loading) return
+    filterClients()
+  }, [currentTabClients, clientState.loading, searchValue.value])
+
   return (
     UIComponent && (
       <UIComponent
         {...props}
+        currentTabClients={currentTabClients}
         billState={billState}
         clientState={clientState}
         searchValue={searchValue}
         setSearchValue={setSearchValue}
+        setCurrentTabClients={setCurrentTabClients}
       />
     )
   )

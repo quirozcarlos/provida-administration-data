@@ -8,7 +8,7 @@ export const Input = styled.input`
   border: 1px solid #DBDCDB;
   border-radius: 7.6px;
   font-size: 16px;
-  padding: 7px 15px;
+  padding: 12px 15px;
   outline: none;
   &:focus {
     border-color: ${() => darken(0.07, '#CCC')};
