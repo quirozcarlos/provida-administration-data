@@ -10,6 +10,7 @@ import { Button } from '../Shared/Buttons'
 import 'react-datepicker/dist/react-datepicker.css';
 import { Tab, Tabs } from '../Shared/Tabs'
 import { SearchWith } from '../BillListing/styles'
+import { SpinnerLoader } from '../SpinnerLoader'
 
 const ClientListingUI = (props) => {
   const {
@@ -123,7 +124,7 @@ const ClientListingUI = (props) => {
           </div>
         )}
         {clientState.loading && (
-          <NotFoundSource content={'Cargando Clientes'} />
+          <SpinnerLoader />
         )}
         {!clientState.loading && !clientState.clients?.length && (
           <NotFoundSource content={'No hay resultados para mostrar'} />

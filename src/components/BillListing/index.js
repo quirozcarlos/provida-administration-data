@@ -10,6 +10,7 @@ import { Button } from '../Shared/Buttons'
 
 import 'react-datepicker/dist/react-datepicker.css';
 import { Tab, Tabs } from '../Shared/Tabs'
+import { SpinnerLoader } from '../SpinnerLoader'
 
 const BillListingUI = (props) => {
   const {
@@ -151,7 +152,7 @@ const BillListingUI = (props) => {
           </div>
         </div>
         {billState.loading && (
-          <NotFoundSource content={'Cargando facturas'} />
+          <SpinnerLoader />
         )}
         {!errorDates && !billState.loading && !billState.result?.length && (
           <NotFoundSource content={'No hay resultados para mostrar'} />
